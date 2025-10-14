@@ -16,6 +16,7 @@ import confetti from 'canvas-confetti';
 import Image from 'next/image';
 
 import { motion } from "framer-motion";
+import FeedSection from "@/components/FeedSection";
 
 export default function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -92,7 +93,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 relative -top-6">
           <Button
             onPress={() => setShowLogin(true)}
             className="bg-[#9B5DE5] hover:bg-[#8644cc] text-white font-bold px-8 py-3 rounded-lg shadow-lg hover:shadow-[#9B5DE5]/50 transition"
@@ -114,25 +115,7 @@ export default function Home() {
       </section>
 
       {/* FEED SECTION */}
-      <section
-        id="feed-section"
-        className="w-full max-w-5xl px-6 pb-32 pt-20 text-left"
-      >
-        <h2 className="text-2xl font-bold mb-6">โพสต์ล่าสุด</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="bg-[#1C2230] hover:bg-[#252C3D] p-6 rounded-xl transition cursor-pointer"
-            >
-              <h3 className="text-xl font-semibold">หาทีมเล่นแรงค์ #{i + 1}</h3>
-              <p className="text-gray-400 text-sm">
-                ต้องการเพื่อนอีก 1 คน เล่นได้ทุก role
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <FeedSection />
       <LoginModal open={showLogin} onClose={() => setShowLogin(false)} />
     </main>
   );
