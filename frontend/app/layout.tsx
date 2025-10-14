@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import ScrollToTop from "@/components/ScrollToTop";import "@/styles/globals.css";
 import { HeroUIProvider } from "@heroui/react";
 import { Metadata, Viewport } from "next";
 import { Link } from "@heroui/link";
@@ -6,7 +6,7 @@ import clsx from "clsx";
 import ProvidersWrapper from "./providers-wrapper";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
+import { fontSans, noto } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
@@ -37,10 +37,11 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontSans.variable
+          "min-h-screen text-foreground bg-background font-noto antialiased",
+          noto.className
         )}
       >
+        <ScrollToTop />
         {/* ✅ ครอบ HeroUIProvider ไว้ภายใน Providers */}
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <ProvidersWrapper>
@@ -49,7 +50,7 @@ export default function RootLayout({
               <Navbar />
 
               {/* Main content */}
-              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+              <main className="mt-10">
                 {children}
               </main>
 
