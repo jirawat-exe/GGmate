@@ -1,0 +1,67 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  displayName String
+  avatar      String?
+  gender      String?
+  age         Int?
+  genres      String?  // เก็บเป็น CSV หรือ JSON
+  posts       Post[]
+  chats       Chat[]
+  blocks   UserBlock[]  @relation("UserBlocks_blocker")
+  blocked  UserBlock[]  @relation("UserBlocks_blocked")
+  createdAt   DateTime @default(now())
+  deletedAt   DateTime?
+  active      Boolean  @default(true)
+}
+
+model UserBlock {
+  id          String   @id @default(uuid())
+  blocker_id  String
+  blocked_id  String
+  created_at  DateTime @default(now())
+
+  blocker User @relation("UserBlocks_blocker", fields: [blocker_id], references: [id])
+  blocked User @relation("UserBlocks_blocked", fields: [blocked_id], references: [id])
+
+  @@unique([blocker_id, blocked_id])
+}
+
+model Post {
+  id             String   @id @default(uuid())
+  userId         String
+  title          String
+  game           String
+  description    String?
+  mode           String   // "casual" | "ranked"
+  rankMin        String?
+  rankMax        String?
+  neededPlayers  Int
+  createdAt      DateTime @default(now())
+  deletedAt      DateTime?
+  active         Boolean  @default(true)
+
+  user   User   @relation(fields: [userId], references: [id])
+  chats  Chat[]
+}
+
+model Chat {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String
+  message   String
+  createdAt DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
