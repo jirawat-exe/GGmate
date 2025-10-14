@@ -6,6 +6,7 @@ import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
 import { useState, useEffect } from "react";
 import LoginModal from "@/components/LoginModal";
+import ChatSimulation from "@/components/ChatSimulation";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
@@ -22,7 +23,7 @@ export default function Home() {
   const [showLogin, setShowLogin] = useState(false);
   
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#000000] to-[#141821] text-white">
+    <main className="min-h-screen flex flex-col items-center justify-center text-white bg-gradient-to-r from-[#060008] via-[#000000] to-[#060000]">
       {/* HERO SECTION */}
       <section className="text-center mt-7 mb-32">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
@@ -34,65 +35,7 @@ export default function Home() {
         </p>
 
         {/* Chat simulation */}
-        <div className="relative h-64 w-full max-w-md mx-auto flex flex-col gap-3 overflow-hidden">
-          {/* A: ซ้าย */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex items-start gap-3"
-          >
-            <Image
-              src="/avatars/A.png"
-              alt="A"
-              width={60}
-              height={60}
-              className=""
-              
-            />
-            <div className="bg-[#1C2230] px-4 py-2 mt-4 rounded-2xl rounded-tl-none max-w-[70%] text-left">
-              <p>เข้าเกมๆ</p>
-            </div>
-          </motion.div>
-
-          {/* B: ขวา */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.3 }}
-            className="flex items-start justify-end gap-3"
-          >
-            <div className="bg-[#252C3D] px-4 py-2 mt-4 rounded-2xl rounded-tr-none max-w-[70%] text-right">
-              <p>แฟนไม่ให้เล่นว่ะ</p>
-            </div>
-            <Image
-              src="/avatars/B.png"
-              alt="B"
-              width={60}
-              height={60}
-              className=""
-            />
-          </motion.div>
-
-          {/* A: ซ้าย */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 2.1 }}
-            className="flex items-start gap-3"
-          >
-            <Image
-              src="/avatars/A.png"
-              alt="A"
-              width={60}
-              height={60}
-              className=""
-            />
-            <div className="bg-[#1C2230] px-4 py-2 mt-4 rounded-2xl rounded-tl-none max-w-[70%] text-left">
-              <p>ไรว้าา</p>
-            </div>
-          </motion.div>
-        </div>
+        <ChatSimulation />
 
         <div className="flex justify-center gap-6 relative -top-3">
         {/* เข้าสู่ระบบ */}
